@@ -10,9 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import static android.R.attr.type;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
   private BottomNavigationView mNavigationView;
+  private BottomNavigationView mSubNavigationView;
+  private int mTypeSelected;
+  private int mSubTypeSelected;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +25,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     setContentView(R.layout.activity_main);
 
     mNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+    mSubNavigationView = (BottomNavigationView) findViewById(R.id.subBottomNavigation);
     initHome();
     mNavigationView.setOnNavigationItemSelectedListener(this);
+    mSubNavigationView.setOnNavigationItemSelectedListener(this);
   }
 
   @Override
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-    setFragment(item.getItemId());
+    int itemId = item.getItemId();
+    if(itemId == R.id.action_left || itemId == R.id.action_right){
+      mSubTypeSelected = itemId;
+    }else {
+      mTypeSelected = itemId;
+    }
+    setFragment();
     return true;
   }
 
@@ -39,20 +52,40 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         break;
       }
     }
-    setFragment(R.id.action_home);
+
+    Menu subMenu = mSubNavigationView.getMenu();
+    for (int i = 0; i < subMenu.size(); i++) {
+      MenuItem menuItem = menu.getItem(i);
+      if (menuItem.getItemId() == R.id.action_left) {
+        menuItem.setChecked(true);
+        break;
+      }
+    }
+    mTypeSelected = R.id.action_home;
+    mSubTypeSelected = R.id.action_left;
+    setFragment();
   }
 
-  private void setFragment(int type){
+  private void setFragment(){
     Fragment fragment = null;
-    switch (type) {
+    StringBuilder sb = new StringBuilder();
+    switch (mSubTypeSelected){
+      case R.id.action_left:
+        sb.append(getString(R.string.left) + " - ");
+        break;
+      case R.id.action_right:
+        sb.append(getString(R.string.right) + " - ");
+        break;
+    }
+    switch (mTypeSelected) {
       case R.id.action_profile:
-        fragment = MenuFragment.newInstance(getString(R.string.profile), getResources().getColor(R.color.colorProfile));
+        fragment = MenuFragment.newInstance(sb.toString() + getString(R.string.profile), getResources().getColor(R.color.colorProfile));
         break;
       case R.id.action_home:
-        fragment = MenuFragment.newInstance(getString(R.string.home), getResources().getColor(R.color.colorHome));
+        fragment = MenuFragment.newInstance(sb.toString() + getString(R.string.home), getResources().getColor(R.color.colorHome));
         break;
       case R.id.action_settings:
-        fragment = MenuFragment.newInstance(getString(R.string.settings), getResources().getColor(R.color.colorSettings));
+        fragment = MenuFragment.newInstance(sb.toString() + getString(R.string.settings), getResources().getColor(R.color.colorSettings));
         break;
     }
 

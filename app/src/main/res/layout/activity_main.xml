@@ -11,19 +11,18 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@+id/bottom_navigation2"/>
+    android:layout_above="@+id/subBottomNavigation"/>
 
   <android.support.design.widget.BottomNavigationView
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_navigation2"
+    android:id="@+id/subBottomNavigation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_above="@+id/bottom_navigation"
     app:itemBackground="@color/colorPrimary"
     app:itemIconTint="@android:color/white"
     app:itemTextColor="@android:color/white"
-    app:menu="@menu/sub_navigation_bottom"
-    android:visibility="gone"/>
+    app:menu="@menu/sub_navigation_bottom"/>
 
   <android.support.design.widget.BottomNavigationView
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,7 +30,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-
     app:itemBackground="@color/colorPrimary"
     app:itemIconTint="@android:color/white"
     app:itemTextColor="@android:color/white"
