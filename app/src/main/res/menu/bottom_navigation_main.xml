@@ -8,10 +8,10 @@
     android:title="@string/text_favorites"
     app:showAsAction="ifRoom" />
   <item
-    android:id="@+id/action_android"
+    android:id="@+id/action_home"
     android:enabled="true"
-    android:icon="@drawable/ic_android_white_24dp"
-    android:title="@string/text_schedules"
+    android:icon="@drawable/ic_home_white_24dp"
+    android:title="@string/text_home"
     app:showAsAction="ifRoom" />
   <item
     android:id="@+id/action_settings"

@@ -3,4 +3,7 @@
   <string name="text_favorites">Profile</string>
   <string name="text_schedules">Android</string>
   <string name="text_music">Settings</string>
+  <string name="right">Right</string>
+  <string name="left">Left</string>
+  <string name="text_home">Home</string>
 </resources>
